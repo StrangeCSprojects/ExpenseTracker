@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <!-- Page heading -->
+    <h2 class="mb-4">Log In</h2>
+
+    <!-- Login form -->
+    <form method="POST">
+        {{ form.hidden_tag() }}  <!-- CSRF token for security -->
+
+        <!-- Email input field -->
+        <div class="mb-3">
+            {{ form.email.label }} {{ form.email(class="form-control") }}
+        </div>
+
+        <!-- Password input field -->
+        <div class="mb-3">
+            {{ form.password.label }} {{ form.password(class="form-control") }}
+        </div>
+
+        <!-- Submit button -->
+        {{ form.submit(class="btn btn-success") }}
+    </form>
+
+{% endblock %}

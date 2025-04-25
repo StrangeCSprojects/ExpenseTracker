@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <!-- Page heading -->
+    <h2 class="mb-4">Spending Summary</h2>
+
+    <!-- Canvas element where Chart.js will render the pie chart -->
+    <canvas id="expenseChart" width="400" height="400"></canvas>
+
+    <!-- Script to create and render a pie chart using Chart.js -->
+    <script>
+        // Get the canvas element by ID
+        const ctx = document.getElementById('expenseChart');
+
+        // Create a new pie chart with category data
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                // Labels passed from Flask (e.g., ['Food', 'Rent', 'Utilities'])
+                labels: {{ labels | tojson }},
+                datasets: [{
+                    // Chart label shown on hover
+                    label: 'Spending by Category',
+                    
+                    // Values passed from Flask (e.g., [100, 300, 150])
+                    data: {{ values | tojson }},
+                    
+                    // Background colors for each slice
+                    backgroundColor: [
+                        '#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8'
+                    ]
+                }]
+            }
+        });
+    </script>
+{% endblock %}

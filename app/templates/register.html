@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+    <!-- Page heading -->
+    <h2 class="mb-4">Create an Account</h2>
+
+    <!-- Registration form -->
+    <form method="POST">
+        {{ form.hidden_tag() }}  <!-- CSRF token for security -->
+
+        <!-- Username input field -->
+        <div class="mb-3">
+            {{ form.username.label }} {{ form.username(class="form-control") }}
+        </div>
+
+        <!-- Email input field -->
+        <div class="mb-3">
+            {{ form.email.label }} {{ form.email(class="form-control") }}
+        </div>
+
+        <!-- Password input field -->
+        <div class="mb-3">
+            {{ form.password.label }} {{ form.password(class="form-control") }}
+        </div>
+
+        <!-- Password confirmation input field -->
+        <div class="mb-3">
+            {{ form.confirm.label }} {{ form.confirm(class="form-control") }}
+        </div>
+
+        <!-- Submit button -->
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{
+    "dev": {
+        "app_function": "run.application",
+        "aws_region": "us-west-2",
+        "exclude": [
+            "boto3",
+            "dateutil",
+            "botocore",
+            "s3transfer",
+            "concurrent"
+        ],
+        "profile_name": "default",
+        "project_name": "expensetracker",
+        "runtime": "python3.12",
+        "s3_bucket": "zappa-8lih3mp6h"
+    }
+}

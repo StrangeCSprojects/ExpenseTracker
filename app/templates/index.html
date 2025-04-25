@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <!-- Page heading -->
+    <h2 class="mb-4">Expense Tracker</h2>
+
+    <!-- Expense form to add new expense entries -->
+    <form method="POST" class="mb-4">
+        {{ form.hidden_tag() }}  <!-- CSRF token for security -->
+
+        <!-- Row with amount, category, and date fields -->
+        <div class="row mb-2">
+            <div class="col">
+                {{ form.amount.label }} {{ form.amount(class="form-control") }}
+            </div>
+            <div class="col">
+                {{ form.category.label }} {{ form.category(class="form-control") }}
+            </div>
+            <div class="col">
+                {{ form.date.label }} {{ form.date(class="form-control") }}
+            </div>
+        </div>
+
+        <!-- Description field (optional) -->
+        <div class="mb-2">
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+        </div>
+
+        <!-- Submit button -->
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+
+    <!-- Section displaying the user's expense list -->
+    <h4 class="mt-4">Your Expenses</h4>
+
+    <!-- Button to download expense data as CSV -->
+    <a href="{{ url_for('main.export_csv') }}" class="btn btn-outline-primary mb-3">Download CSV</a>
+
+    <!-- Expense table -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through expenses and display each row -->
+            {% for expense in expenses %}
+            <tr>
+                <td>${{ expense.amount }}</td>
+                <td>{{ expense.category }}</td>
+                <td>{{ expense.description or '-' }}</td>
+                <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
